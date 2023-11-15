@@ -1,27 +1,35 @@
 ---
 - name: Add Nvidia GPG apt Key
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://nvidia.github.io/nvidia-docker/gpgkey
     state: present
 
 - name: Add Nvidia Repository Part 1
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb https://nvidia.github.io/libnvidia-container/stable/ubuntu18.04/$(ARCH) /
     state: present
 
 - name: Add Nvidia Repository Part 2
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb https://nvidia.github.io/nvidia-container-runtime/stable/ubuntu18.04/$(ARCH) /
     state: present
 
 - name: Update apt and install nvidia-container-toolkit & nvidia-driver
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
-    update_cache: yes
+    update_cache: true
     state: latest
-  loop: ["nvidia-container-toolkit", "nvidia-driver-535"]
+  loop: ["nvidia-container-toolkit", "nvidia-driver-{{ nvidia_driver_version }}"]
 
-- name: Hold nvidia-driver-535 nvidia-container-toolkit
-  command: >
-    apt-mark hold nvidia-driver-535 nvidia-container-toolkit
-  ignore_errors: True
+- name: Hold nvidia-driver nvidia-container-toolkit
+  ansible.builtin.command: apt-mark hold nvidia-driver-{{ nvidia_driver_version }} nvidia-container-toolkit
+  ignore_errors: true
+  changed_when: false
+
+- name: Add custom docker `daemon.json` file
+  ansible.builtin.template:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+    mode: "0644"
+    owner: root
+    group: root

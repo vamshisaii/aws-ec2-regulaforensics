@@ -67,7 +67,7 @@ variable "asg_on_demand_percentage_above_base_capacity" {
 variable "faceapi_instance_type" {
   description = "Faceapi GPU worker Instance type to deploy"
   type        = string
-  default     = "c6a.xlarge"
+  default     = "c6a.large"
 }
 
 variable "worker_count" {

@@ -1,6 +1,6 @@
 #!/bin/bash
 sleep 5
-cd /home/admin/
+cd /home/ubuntu/
 
 echo worker_count=${worker_count} >> .env
 echo backlog=${backlog} >> .env

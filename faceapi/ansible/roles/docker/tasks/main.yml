@@ -1,61 +1,49 @@
 ---
 - name: Update apt cache
-  apt: update_cache=true cache_valid_time=3600
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
 
 - name: Install required system packages
-  apt:
+  ansible.builtin.apt:
     name: "{{ item }}"
     state: latest
-    update_cache: yes
-  loop: ["apt-transport-https", "software-properties-common", "ca-certificates", "curl", "zip", "unzip", "nvtop", "jq", "python3-pip"]
+    update_cache: true
+  loop: ["apt-transport-https", "software-properties-common", "ca-certificates", "curl", "python3-pip"]
 
 - name: Add Docker GPG apt Key
-  get_url:
+  ansible.builtin.get_url:
     url: https://download.docker.com/linux/ubuntu/gpg
     dest: /etc/apt/trusted.gpg.d/docker.asc
     mode: '0644'
     force: true
 
 - name: Add Docker Repository
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
     state: present
     filename: docker
     update_cache: true
 
 - name: Update apt and install docker-ce
-  apt:
-    update_cache: yes
+  ansible.builtin.apt:
+    update_cache: true
     name: docker-ce
     state: latest
 
 - name: Install docker-compose
-  remote_user: ubuntu
-  get_url:
-    url : https://github.com/docker/compose/releases/download/v2.19.1/docker-compose-Linux-x86_64
+  ansible.builtin.get_url:
+    url: https://github.com/docker/compose/releases/download/{{ compose_version }}/docker-compose-Linux-x86_64
     dest: /usr/local/bin/docker-compose
     mode: 'u+x,g+x'
+  remote_user: ubuntu
 
 - name: Enable Docker CE service at startup
-  service:
+  ansible.builtin.service:
     name: docker
     state: started
-    enabled: yes
+    enabled: true
 
 - name: Install Docker Module for Python
-  pip:
+  ansible.builtin.pip:
     name: docker
-
-- name: Ensure docker users are added to the docker group.
-  user:
-    name: admin
-    groups: [ 'docker' ]
-    append: yes
-
-- name: Add custom docker `daemon.json` file
-  template:
-    src: daemon.json
-    dest: /etc/docker/daemon.json
-    mode: 0644
-    owner: root
-    group: root
