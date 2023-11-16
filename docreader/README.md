@@ -1,4 +1,4 @@
-# Faceapi Infrastructure deployment (AWS Cloud)
+# Docreader Infrastructure deployment (AWS Cloud)
 
 
 ## Prerequisites
@@ -14,10 +14,10 @@
 
 - Set license file to `packer/license/regula.license`
 - Set `env`/`region` to packer variables file `packer/variables/docreader.pkrvars.hcl`
-- Pick required `docreader_tag` vars [hub.docker.com](https://hub.docker.com/r/regulaforensics/faceapi/tags)
+- Pick required `docreader_tag` vars [hub.docker.com](https://hub.docker.com/r/regulaforensics/docreader/tags)
 - Run packer build, i.e.:
 ```bash
-packer build -var-file=variables/faceapi.pkrvars.hcl -var faceapi_tag=5.2.256.842 faceapi.pkr.hcl
+packer build -var-file=variables/docreader.pkrvars.hcl -var docreader_tag=6.9.243116.738 docreader.pkr.hcl
 ```
 
 **Terraform**
@@ -29,4 +29,3 @@ Deploy:
 - `terraform workspace new ${env}` (optional)
 - `terraform plan`
 - `terraform apply`
-

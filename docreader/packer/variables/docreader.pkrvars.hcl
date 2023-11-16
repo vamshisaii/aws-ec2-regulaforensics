@@ -1,0 +1,5 @@
+region             = "eu-central-1"
+env                = "dev"
+ami_name           = "docreader"
+spot_instance_type = "c6a.large"
+docreader_tag      = "latest"

@@ -1,7 +1,7 @@
 resource "aws_iam_service_linked_role" "autoscaling" {
   aws_service_name = "autoscaling.amazonaws.com"
   description      = "A service linked role for autoscaling"
-  custom_suffix    = "${local.name}-${local.environment}-temp"
+  custom_suffix    = "${local.name}-${local.environment}"
 
   # Sometimes good sleep is required to have some IAM resources created before they can be used
   provisioner "local-exec" {
@@ -9,13 +9,13 @@ resource "aws_iam_service_linked_role" "autoscaling" {
   }
 }
 
-data "aws_ami" "faceapi" {
+data "aws_ami" "docreader" {
   most_recent = true
   owners      = ["self"]
 
   filter {
     name   = "name"
-    values = ["${local.name}-${local.environment}-${var.engine}-*"]
+    values = ["${local.name}-${local.environment}-*"]
   }
 }
 
@@ -79,8 +79,8 @@ module "asg" {
   launch_template_description = "${local.name} ${local.environment} Launch template"
   update_default_version      = true
 
-  image_id           = data.aws_ami.faceapi.id
-  instance_type      = var.faceapi_instance_type
+  image_id           = data.aws_ami.docreader.id
+  instance_type      = var.docreader_instance_type
   user_data          = base64encode(data.template_file.startup.rendered)
   capacity_rebalance = true
 
@@ -88,7 +88,7 @@ module "asg" {
   create_iam_instance_profile = true
   iam_role_name               = "${local.name}-${local.environment}-asg"
   iam_role_path               = "/ec2/"
-  iam_role_description        = "FaceAPI IAM role"
+  iam_role_description        = "Docreader IAM role"
   iam_role_tags = {
     CustomIamRole = "Yes"
   }
@@ -104,7 +104,7 @@ module "asg" {
     http_put_response_hop_limit = 32
   }
 
-  security_groups = [module.vpc.default_security_group_id, module.security_group_face_ec2.security_group_id]
+  security_groups = [module.vpc.default_security_group_id, module.security_group_docreader_ec2.security_group_id]
 
   target_group_arns = [for k, v in module.alb.target_groups : v.arn]
 
@@ -143,12 +143,13 @@ module "asg" {
     }
   }
 
+
   tags = local.tags
 
   depends_on = [module.vpc.natgw_ids]
 }
 
-module "security_group_face_ec2" {
+module "security_group_docreader_ec2" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 4.0"
 

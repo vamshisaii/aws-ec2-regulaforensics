@@ -6,13 +6,6 @@ variable "name" {
 variable "environment" {
   description = "Environment to deploy"
   type        = string
-  default     = "dev"
-}
-
-variable "engine" {
-  description = "FaceAPI version: CPU/GPU"
-  default     = "cpu"
-  type        = string
 }
 
 variable "region" {
@@ -34,49 +27,49 @@ variable "domain" {
 }
 
 variable "asg_min_size" {
-  description = "ASG GPU Minimum size of the Auto Scaling Group"
+  description = "ASG Minimum size of the Auto Scaling Group"
   default     = 1
   type        = number
 }
 
 variable "asg_max_size" {
-  description = "ASG GPU Maximum size of the Auto Scaling Group"
+  description = "ASG Maximum size of the Auto Scaling Group"
   default     = 4
   type        = number
 }
 
 variable "asg_desired_capacity" {
-  description = "ASG GPU Number of Amazon EC2 instances that should be running in the group"
+  description = "ASG Number of Amazon EC2 instances that should be running in the group"
   default     = 1
   type        = number
 }
 
 variable "asg_on_demand_base_capacity" {
-  description = "ASG GPU Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances"
+  description = "ASG Absolute minimum amount of desired capacity that must be fulfilled by on-demand instances"
   default     = 0
   type        = number
 }
 
 variable "asg_on_demand_percentage_above_base_capacity" {
-  description = "ASG GPU Percentage split between on-demand and Spot instances above the base on-demand capacity"
+  description = "ASG Percentage split between on-demand and Spot instances above the base on-demand capacity"
   default     = 0
   type        = number
 }
 
-variable "faceapi_instance_type" {
-  description = "Faceapi GPU worker Instance type to deploy"
+variable "docreader_instance_type" {
+  description = "Docreader worker Instance type to deploy"
   type        = string
   default     = "c6a.large"
 }
 
 variable "worker_count" {
-  description = "Faceapi GPU workers count"
+  description = "Docreader workers count"
   default     = 1
   type        = number
 }
 
 variable "backlog" {
-  description = "Faceapi backlog size"
+  description = "Docreader backlog size"
   default     = 20
   type        = number
 }

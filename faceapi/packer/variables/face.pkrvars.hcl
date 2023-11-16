@@ -1,5 +1,5 @@
 region              = "eu-central-1"
-env                 = "prod"
+env                 = "dev"
 ami_name            = "faceapi"
 spot_instance_type  = "c6a.large"
 faceapi_tag         = "5.2.256.842"
