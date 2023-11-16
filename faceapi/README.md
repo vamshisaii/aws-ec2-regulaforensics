@@ -13,8 +13,8 @@
 **Packer**
 
 - Set license file to `packer/license/regula.license`
-- Set `env`/`region` to packer variables file `packer/variables/docreader.pkrvars.hcl`
-- Pick required `docreader_tag` vars [hub.docker.com](https://hub.docker.com/r/regulaforensics/faceapi/tags)
+- Set `env`/`region` to packer variables file `packer/variables/face.pkrvars.hcl`
+- Pick required `docreader_tag` vars [hub.docker.com](https://hub.docker.com/r/regulaforensics/face-api/tags)
 - Run packer build, i.e.:
 ```bash
 packer build -var-file=variables/faceapi.pkrvars.hcl -var faceapi_tag=5.2.256.842 faceapi.pkr.hcl
