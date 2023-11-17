@@ -16,7 +16,7 @@ variable "region" {
 
 variable "vpc_network" {
   description = "VPC network octet"
-  default     = "10.10"
+  default     = "10.11"
   type        = string
 }
 

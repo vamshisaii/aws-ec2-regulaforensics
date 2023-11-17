@@ -9,7 +9,7 @@ variable "environment" {
   default     = "dev"
 }
 
-variable "engine" {
+variable "faceapi_engine" {
   description = "FaceAPI version: CPU/GPU"
   default     = "cpu"
   type        = string

@@ -19,7 +19,7 @@
 
     - name: Create folders
       ansible.builtin.file:
-        path: /home/admin/{{ item }}
+        path: /home/ubuntu/{{ item }}
         state: directory
         owner: ubuntu
         group: ubuntu
@@ -49,6 +49,3 @@
         content: |
           docreader_tag={{ docreader_tag }}
           nginx_tag={{ nginx_tag }}
-
-    - name: Clean APT cache
-      ansible.builtin.shell: apt-get clean

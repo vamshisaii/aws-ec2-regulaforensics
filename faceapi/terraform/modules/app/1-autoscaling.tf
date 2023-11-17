@@ -15,7 +15,7 @@ data "aws_ami" "faceapi" {
 
   filter {
     name   = "name"
-    values = ["${local.name}-${local.environment}-${var.engine}-*"]
+    values = ["${local.name}-${local.environment}-${var.faceapi_engine}-*"]
   }
 }
 

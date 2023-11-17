@@ -3,7 +3,7 @@ module "app" {
 
   name                                         = var.name
   environment                                  = var.environment
-  engine                                       = var.engine
+  faceapi_engine                               = var.faceapi_engine
   region                                       = var.region
   vpc_network                                  = var.vpc_network
   domain                                       = var.domain
