@@ -27,11 +27,11 @@ Terraform is an infrastructure as code (IaC) software tool. With Terraform, you 
 - Set license file to `packer/license/regula.license` folder
 - Edit packer variables file `packer/variables/faceapi.pkrvars.hcl` according to your needs
 - Required `faceapi_tag` (default "5.2.256.842") can be found at [hub.docker.com](https://hub.docker.com/r/regulaforensics/face-api/tags)
-- `faceapi_engine` is either cpu(default) or gpu. GPU engine requires GPU capable EC2 instance types (i.e. [`g4dn`](https://aws.amazon.com/ec2/instance-types/g4/))
+- `faceapi_engine` is either cpu(default) or gpu. This is important for the next Terraform section.
 - Run packer build to create AWS ami
 
 > [!NOTE]
-> execute command at `faceapi/packer` folder
+> Execute command at `faceapi/packer` folder
 
 ```bash
   packer build -var-file=variables/faceapi.pkrvars.hcl faceapi.pkr.hcl
@@ -54,7 +54,7 @@ Terraform is an infrastructure as code (IaC) software tool. With Terraform, you 
 
 ```bash
   terraform init
-  terraform workspace new ${env}` (step is optional)
+  terraform workspace new dev || teraform workspace select dev #(step is optional)
   terraform plan
   terraform apply
 ```

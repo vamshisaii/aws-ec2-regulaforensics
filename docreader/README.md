@@ -30,7 +30,7 @@ Terraform is an infrastructure as code (IaC) software tool. With Terraform, you 
 - Run packer build to create AWS ami
 
 > [!NOTE]
-> execute command at `docreader/packer` folder
+> Execute command at `docreader/packer` folder
 
 ```bash
   packer build -var-file=variables/docreader.pkrvars.hcl docreader.pkr.hcl
@@ -48,7 +48,7 @@ Terraform is an infrastructure as code (IaC) software tool. With Terraform, you 
 
 ```bash
   terraform init
-  terraform workspace new ${env}` (step is optional)
+  terraform workspace new dev || teraform workspace select dev #(step is optional)
   terraform plan
   terraform apply
 ```
