@@ -16,7 +16,7 @@ Terraform is an Infrastructure as Code (IaC) software tool. With Terraform, you 
 
 ### Configure AWS CLI
 
-- Set AWS cli credentials:
+- Set AWS CLI credentials:
 ```bash
   aws configure
 ```
@@ -24,9 +24,9 @@ Terraform is an Infrastructure as Code (IaC) software tool. With Terraform, you 
 ### Configure Packer
 
 - Set a license file to the `packer/license/regula.license` folder.
-- Edit the packer variables file `packer/variables/docreader.pkrvars.hcl` according to your needs.
+- Edit the Packer variables file `packer/variables/docreader.pkrvars.hcl` according to your needs.
 - Required `docreader_tag` (default "latest") can be found at [hub.docker.com](https://hub.docker.com/r/regulaforensics/docreader/tags).
-- Run packer build to create AWS ami.
+- Run a Packer build to create AWS AMI.
 
 > [!NOTE]
 > Execute the command at the `docreader/packer` folder.
@@ -37,8 +37,8 @@ Terraform is an Infrastructure as Code (IaC) software tool. With Terraform, you 
 
 ### Configure Terraform
 
-- Edit terraform variables at `terraform/main.tf`.
-- Upload a certificate for your domain "*.example.com" using AWS Certificate Manager (ACM). (See `terraform/variables.tf` - `domain` var).
+- Edit Terraform variables at `terraform/main.tf`.
+- Upload a certificate for your domain "*.example.com" using AWS Certificate Manager (ACM). (See `terraform/variables.tf` - `domain` var.)
 
 ### Run Terraform templates
 
@@ -47,7 +47,7 @@ Terraform is an Infrastructure as Code (IaC) software tool. With Terraform, you 
 
 ```bash
   terraform init
-  terraform workspace new dev || terraform workspace select dev #(step is optional)
+  terraform workspace new dev || A Terraform workspace, select dev # (optional).
   terraform plan
   terraform apply
 ```
