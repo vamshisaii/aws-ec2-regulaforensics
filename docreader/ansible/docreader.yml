@@ -1,0 +1,51 @@
+---
+- name: Prepare Docreader CPU AMI
+  hosts: all
+  become: true
+  vars_files:
+    - "app/defaults.yml"
+
+  roles:
+    - role: docker
+
+  tasks:
+    - name: Pull Docker images
+      community.docker.docker_image:
+        name: "{{ item }}"
+        source: pull
+      loop: ["nginx:{{ nginx_tag }}"]
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+
+    - name: Create folders
+      ansible.builtin.file:
+        path: /home/ubuntu/{{ item }}
+        state: directory
+        owner: ubuntu
+        group: ubuntu
+        mode: "0775"
+      loop: ["nginx"]
+
+    - name: Copy config files
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        remote_src: true
+        backup: true
+        owner: ubuntu
+        group: ubuntu
+        mode: "0755"
+      with_items:
+        - { src: "/tmp/nginx/", dest: "/home/ubuntu/nginx/" }
+        - { src: "/tmp/regula.license", dest: "/home/ubuntu/regula.license" }
+        - { src: "/tmp/docker-compose.yml", dest: "/home/ubuntu/docker-compose.yml" }
+
+    - name: Create env for docker-compose
+      ansible.builtin.copy:
+        dest: "/home/ubuntu/.env"
+        owner: ubuntu
+        group: root
+        mode: "0755"
+        content: |
+          docreader_tag={{ docreader_tag }}
+          nginx_tag={{ nginx_tag }}

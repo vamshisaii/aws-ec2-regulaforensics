@@ -1,0 +1,4 @@
+---
+nginx_tag: 1.25.2
+compose_version: v2.23.0
+nvidia_driver_version: 535

@@ -1,0 +1,9 @@
+{
+   "runtimes": {
+       "nvidia": {
+           "args": [],
+           "path": "nvidia-container-runtime"
+       }
+   },
+   "exec-opts": ["native.cgroupdriver=cgroupfs"]
+}
