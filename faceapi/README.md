@@ -53,7 +53,7 @@ Terraform is an Infrastructure as Code (IaC) software tool. With Terraform, you 
 
 ```bash
   terraform init
-  terraform workspace new dev || A Terraform workspace, select dev # (optional).
+  terraform workspace new dev || terraform workspace select dev # (optional).
   terraform plan
   terraform apply
 ```
