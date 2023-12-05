@@ -23,7 +23,7 @@ Terraform is an Infrastructure as Code (IaC) software tool. With Terraform, you 
 
 ### Configure Packer
 
-- Set a license file to the `packer/license/regula.license` folder.
+- Set a license file to the `packer/artifacts/license/regula.license` folder.
 - Edit the Packer variables file `packer/variables/docreader.pkrvars.hcl` according to your needs.
 - Required `docreader_tag` (default "latest") can be found at [hub.docker.com](https://hub.docker.com/r/regulaforensics/docreader/tags).
 - Run a Packer build to create AWS AMI.
