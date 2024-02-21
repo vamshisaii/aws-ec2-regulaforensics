@@ -13,7 +13,7 @@ services:
       DOCREADER_CORS_ORIGINS: "*"
     volumes:
       - docreader_site:/app/view/static
-      - /home/ubuntu/regula.license:/app/extBin/unix_x64/regula.license
+      - /home/ubuntu/regula.license:/app/extBin/unix/regula.license
     networks:
       - docreader-network
     restart: always

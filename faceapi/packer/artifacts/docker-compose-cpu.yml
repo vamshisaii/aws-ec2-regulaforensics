@@ -11,7 +11,7 @@ services:
       FACEAPI_TIMEOUT: "60"
       FACEAPI_CORS_ORIGINS: "*"
     volumes:
-      - /home/ubuntu/regula.license:/app/extBin/unix_x64/${faceapi_engine}/regula.license
+      - /home/ubuntu/regula.license:/app/extBin/unix/regula.license
       - faceapi_site:/app/view/static
     networks:
       - faceapi-network
