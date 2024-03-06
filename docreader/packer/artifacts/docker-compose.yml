@@ -5,8 +5,6 @@ services:
   docreader:
     image: regulaforensics/docreader:${docreader_tag}
     container_name: docreader
-    environment:
-      DOCREADER_CONFIG_PATH: /app/config.yaml
     volumes:
       - docreader_site:/app/view/static
       - /home/ubuntu/regula.license:/app/extBin/unix/regula.license
