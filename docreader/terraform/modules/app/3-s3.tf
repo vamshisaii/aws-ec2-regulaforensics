@@ -14,11 +14,6 @@ module "s3_docreader_bucket_results" {
 
   force_destroy = true
 
-  cors_rule = [{
-    allowed_methods = ["GET", "HEAD", "PUT"]
-    allowed_origins = ["*"]
-  }]
-
   versioning = {
     enabled = true
   }
@@ -35,11 +30,6 @@ module "s3_docreader_bucket_session_api" {
   restrict_public_buckets = true
 
   force_destroy = true
-
-  cors_rule = [{
-    allowed_methods = ["GET", "HEAD", "PUT"]
-    allowed_origins = ["*"]
-  }]
 
   versioning = {
     enabled = true
