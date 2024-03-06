@@ -6,14 +6,11 @@ services:
     image: regulaforensics/docreader:${docreader_tag}
     container_name: docreader
     environment:
-      DOCREADER_ENABLE_DEMO_WEB_APP: "false"
-      DOCREADER_WORKERS: ${worker_count}
-      DOCREADER_BACKLOG: ${backlog}
-      DOCREADER_TIMEOUT: "60"
-      DOCREADER_CORS_ORIGINS: "*"
+      DOCREADER_CONFIG_PATH: /app/config.yaml
     volumes:
       - docreader_site:/app/view/static
       - /home/ubuntu/regula.license:/app/extBin/unix/regula.license
+      - /home/ubuntu/config.yaml:/app/config.yaml
     networks:
       - docreader-network
     restart: always

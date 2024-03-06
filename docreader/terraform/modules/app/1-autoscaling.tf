@@ -1,3 +1,47 @@
+## S3 bucket access policy
+data "aws_iam_policy_document" "s3_policy" {
+  statement {
+    sid       = "S3${local.name}${local.environment}0"
+    actions   = ["s3:ListAllMyBuckets"]
+    resources = ["*"]
+  }
+
+  statement {
+    sid = "S3${local.name}${local.environment}1"
+    actions = [
+      "s3:ListBucket",
+      "s3:GetBucketLocation"
+    ]
+    resources = [
+      "${module.s3_bucket_logs.s3_bucket_arn}",
+      "${module.s3_bucket_session.s3_bucket_arn}"
+    ]
+  }
+
+  statement {
+    sid = "S3${local.name}${local.environment}2"
+    actions = [
+      "s3:PutObject",
+      "s3:PutObjectAcl",
+      "s3:GetObject",
+      "s3:GetObjectAcl",
+      "s3:DeleteObject"
+    ]
+    resources = [
+      "${module.s3_bucket_session.s3_bucket_arn}/*",
+      "${module.s3_bucket_logs.s3_bucket_arn}/*"
+    ]
+  }
+}
+
+resource "aws_iam_policy" "s3_policy" {
+  name   = "${local.name}${local.environment}s3"
+  path   = "/"
+  policy = data.aws_iam_policy_document.s3_policy.json
+
+  tags = local.tags
+}
+
 resource "aws_iam_service_linked_role" "autoscaling" {
   aws_service_name = "autoscaling.amazonaws.com"
   description      = "A service linked role for autoscaling"
@@ -23,8 +67,14 @@ data "template_file" "startup" {
   template = file("${path.module}/user-data/startup.tpl")
 
   vars = {
-    worker_count = var.worker_count
-    backlog      = var.backlog
+    AWS_REGION             = var.region
+    WORKER_COUNT           = var.worker_count
+    DB_USERNAME            = var.db_username
+    DB_PASSD               = var.db_password
+    DB_HOST                = module.db.db_instance_address
+    DB_NAME                = var.db_name
+    S3_BUCKET_LOGS_NAME    = module.s3_bucket_logs.s3_bucket_id
+    S3_BUCKET_SESSION_NAME = module.s3_bucket_session.s3_bucket_id
   }
 }
 
@@ -96,6 +146,7 @@ module "asg" {
   iam_role_policies = {
     AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
     CloudWatchAgentServerPolicy  = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
+    S3BucketAccess               = aws_iam_policy.s3_policy.arn
   }
 
   metadata_options = {

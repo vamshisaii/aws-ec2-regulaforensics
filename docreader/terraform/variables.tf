@@ -1,3 +1,8 @@
+variable "account_id" {
+  description = "Account ID to deploy"
+  type        = string
+}
+
 variable "name" {
   description = "Application name to deploy"
   type        = string
@@ -24,7 +29,41 @@ variable "vpc_network" {
 
 variable "domain" {
   description = "Certificate's domain"
-  default     = "*.example.com"
+  default     = "*.regulaforensics.com"
+  type        = string
+}
+
+variable "db_instance_class" {
+  description = "DB Instance Class to deploy"
+  type        = string
+  default     = "db.t4g.micro"
+}
+
+variable "db_allocated_storage" {
+  description = "DB allocated storage size"
+  type        = string
+  default     = 10
+}
+
+variable "db_max_allocated_storage" {
+  description = "DB max allocated storage size threshold"
+  type        = string
+  default     = 25
+}
+
+variable "db_name" {
+  description = "RDS name to deploy"
+  type        = string
+  default     = "docreader"
+}
+
+variable "db_username" {
+  description = "DB Instance username to deploy"
+  type        = string
+}
+
+variable "db_password" {
+  description = "DB Instance password to deploy"
   type        = string
 }
 
@@ -67,12 +106,6 @@ variable "docreader_instance_type" {
 variable "worker_count" {
   description = "Docreader workers count"
   default     = 1
-  type        = number
-}
-
-variable "backlog" {
-  description = "Docreader backlog size"
-  default     = 20
   type        = number
 }
 
