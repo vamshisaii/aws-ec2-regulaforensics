@@ -9,8 +9,6 @@ module "db" {
   family                = "postgres16" # DB parameter group
   major_engine_version  = "16"         # DB option group
   instance_class        = var.db_instance_class
-  allocated_storage     = var.db_allocated_storage
-  max_allocated_storage = var.db_max_allocated_storage
 
   cloudwatch_log_group_retention_in_days = 365
 

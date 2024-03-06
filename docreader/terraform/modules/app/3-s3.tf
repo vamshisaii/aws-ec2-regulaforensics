@@ -1,19 +1,11 @@
-resource "random_uuid" "logs" {
-  keepers = {
-    image = data.aws_ami.docreader.id
-  }
+resource "random_uuid" "default" {
 }
 
-resource "random_uuid" "session" {
-  keepers = {
-    image = data.aws_ami.docreader.id
-  }
-}
 
-module "s3_bucket_logs" {
+module "s3_docreader_bucket_results" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
-  bucket = "docreader-logs-${random_uuid.logs.result}"
+  bucket = "docreader-results-${random_uuid.default.result}"
 
   block_public_acls       = true
   block_public_policy     = true
@@ -36,10 +28,10 @@ module "s3_bucket_logs" {
   }
 }
 
-module "s3_bucket_session" {
+module "s3_docreader_bucket_session_api" {
   source = "terraform-aws-modules/s3-bucket/aws"
 
-  bucket = "docreader-session-${random_uuid.session.result}"
+  bucket = "docreader-session-api-${random_uuid.default.result}"
 
   block_public_acls       = true
   block_public_policy     = true

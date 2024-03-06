@@ -39,18 +39,6 @@ variable "db_instance_class" {
   default     = "db.t4g.micro"
 }
 
-variable "db_allocated_storage" {
-  description = "DB allocated storage size"
-  type        = string
-  default     = 10
-}
-
-variable "db_max_allocated_storage" {
-  description = "DB max allocated storage size threshold"
-  type        = string
-  default     = 25
-}
-
 variable "db_name" {
   description = "RDS name to deploy"
   type        = string

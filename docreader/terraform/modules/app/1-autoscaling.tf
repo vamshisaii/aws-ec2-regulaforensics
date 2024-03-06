@@ -13,8 +13,8 @@ data "aws_iam_policy_document" "s3_policy" {
       "s3:GetBucketLocation"
     ]
     resources = [
-      "${module.s3_bucket_logs.s3_bucket_arn}",
-      "${module.s3_bucket_session.s3_bucket_arn}"
+      "${module.s3_docreader_bucket_results.s3_bucket_arn}",
+      "${module.s3_docreader_bucket_session_api.s3_bucket_arn}"
     ]
   }
 
@@ -28,8 +28,8 @@ data "aws_iam_policy_document" "s3_policy" {
       "s3:DeleteObject"
     ]
     resources = [
-      "${module.s3_bucket_session.s3_bucket_arn}/*",
-      "${module.s3_bucket_logs.s3_bucket_arn}/*"
+      "${module.s3_docreader_bucket_session_api.s3_bucket_arn}/*",
+      "${module.s3_docreader_bucket_results.s3_bucket_arn}/*"
     ]
   }
 }
@@ -73,8 +73,8 @@ data "template_file" "startup" {
     DB_PASSD               = var.db_password
     DB_HOST                = module.db.db_instance_address
     DB_NAME                = var.db_name
-    S3_BUCKET_LOGS_NAME    = module.s3_bucket_logs.s3_bucket_id
-    S3_BUCKET_SESSION_NAME = module.s3_bucket_session.s3_bucket_id
+    S3_BUCKET_LOGS_NAME    = module.s3_docreader_bucket_results.s3_bucket_id
+    S3_BUCKET_SESSION_NAME = module.s3_docreader_bucket_session_api.s3_bucket_id
   }
 }
 
