@@ -19,10 +19,6 @@ module "s3_docreader_bucket_results" {
     allowed_origins = ["*"]
   }]
 
-
-  control_object_ownership = true
-  object_ownership         = "ObjectWriter"
-
   versioning = {
     enabled = true
   }
@@ -44,9 +40,6 @@ module "s3_docreader_bucket_session_api" {
     allowed_methods = ["GET", "HEAD", "PUT"]
     allowed_origins = ["*"]
   }]
-
-  control_object_ownership = true
-  object_ownership         = "ObjectWriter"
 
   versioning = {
     enabled = true
