@@ -73,7 +73,7 @@ data "template_file" "startup" {
     DB_PASSD               = var.db_password
     DB_HOST                = module.db.db_instance_address
     DB_NAME                = var.db_name
-    S3_BUCKET_LOGS_NAME    = module.s3_docreader_bucket_results.s3_bucket_id
+    S3_BUCKET_RESULTS_NAME = module.s3_docreader_bucket_results.s3_bucket_id
     S3_BUCKET_SESSION_NAME = module.s3_docreader_bucket_session_api.s3_bucket_id
   }
 }
@@ -169,18 +169,6 @@ module "asg" {
         }
         target_value = 20
       }
-    }
-  }
-
-  create_schedule = var.create_schedule
-
-  schedules = {
-    up = {
-      min_size         = var.asg_min_size
-      max_size         = var.asg_max_size
-      desired_capacity = var.asg_max_size
-      recurrence       = "45 9 * * 1-5"
-      time_zone        = "Etc/UTC"
     }
   }
 

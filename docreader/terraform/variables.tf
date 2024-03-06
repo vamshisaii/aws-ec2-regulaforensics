@@ -96,9 +96,3 @@ variable "worker_count" {
   default     = 1
   type        = number
 }
-
-variable "create_schedule" {
-  description = "Determines whether to create autoscaling group schedule or not"
-  type        = bool
-  default     = false
-}

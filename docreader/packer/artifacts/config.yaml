@@ -19,7 +19,7 @@ service:
     enabled: true
     results:
       location:
-        bucket: S3_BUCKET_LOGS_NAME
+        bucket: S3_BUCKET_RESULTS_NAME
         prefix: "results"
 
   sessionApi:

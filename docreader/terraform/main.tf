@@ -18,5 +18,4 @@ module "app" {
   asg_on_demand_percentage_above_base_capacity = var.asg_on_demand_percentage_above_base_capacity
   docreader_instance_type                      = var.docreader_instance_type
   worker_count                                 = var.worker_count
-  create_schedule                              = var.create_schedule
 }
