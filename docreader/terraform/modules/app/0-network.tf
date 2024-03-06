@@ -1,6 +1,6 @@
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.1"
+  version = "~> 5.5"
 
   name = "${local.name}-${local.environment}-vpc"
   cidr = "${var.vpc_network}.0.0/16"
@@ -13,6 +13,7 @@ module "vpc" {
   manage_default_network_acl    = false
   manage_default_route_table    = false
   manage_default_security_group = false
+
 
   enable_nat_gateway = true
   single_nat_gateway = true
