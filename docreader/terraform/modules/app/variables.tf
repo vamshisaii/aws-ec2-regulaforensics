@@ -27,7 +27,7 @@ variable "vpc_network" {
 
 variable "domain" {
   description = "Certificate's domain"
-  default     = "*.regulaforensics.com"
+  default     = "*.example.com"
   type        = string
 }
 

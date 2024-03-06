@@ -1,14 +1,14 @@
 module "db" {
   source     = "terraform-aws-modules/rds/aws"
-  version    = "~> 6.1"
+  version    = "~> 6.5"
   identifier = "docreader${var.environment}"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
-  engine                = "postgres"
-  engine_version        = "16.2"
-  family                = "postgres16" # DB parameter group
-  major_engine_version  = "16"         # DB option group
-  instance_class        = var.db_instance_class
+  engine               = "postgres"
+  engine_version       = "16.2"
+  family               = "postgres16" # DB parameter group
+  major_engine_version = "16"         # DB option group
+  instance_class       = var.db_instance_class
 
   cloudwatch_log_group_retention_in_days = 365
 
@@ -21,6 +21,8 @@ module "db" {
   password                    = var.db_password
   port                        = 5432
 
+  allocated_storage     = 20
+  max_allocated_storage = 100
 
   multi_az               = false
   db_subnet_group_name   = module.vpc.database_subnet_group
@@ -57,7 +59,7 @@ module "db" {
 
 module "security_group_rds" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 5.1.0"
+  version = "~> 5.1"
 
   name        = "docreader-${local.environment}-rds"
   description = "PostgreSQL security group"

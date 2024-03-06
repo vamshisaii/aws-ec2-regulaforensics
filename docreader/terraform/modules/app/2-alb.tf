@@ -6,7 +6,7 @@ data "aws_acm_certificate" "certificate" {
 
 module "alb" {
   source  = "terraform-aws-modules/alb/aws"
-  version = "~> 9.1"
+  version = "~> 9.7"
 
   name = "${local.name}-${local.environment}-alb"
 

@@ -3,7 +3,8 @@ resource "random_uuid" "default" {
 
 
 module "s3_docreader_bucket_results" {
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "~> 4.1"
 
   bucket = "docreader-results-${random_uuid.default.result}"
 
@@ -20,7 +21,8 @@ module "s3_docreader_bucket_results" {
 }
 
 module "s3_docreader_bucket_session_api" {
-  source = "terraform-aws-modules/s3-bucket/aws"
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "~> 4.1"
 
   bucket = "docreader-session-api-${random_uuid.default.result}"
 

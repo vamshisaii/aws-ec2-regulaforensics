@@ -80,7 +80,7 @@ data "template_file" "startup" {
 
 module "asg" {
   source  = "terraform-aws-modules/autoscaling/aws"
-  version = "~> 7.1"
+  version = "~> 7.4"
 
   # Autoscaling group
   name = "${local.name}-${local.environment}"
@@ -190,17 +190,19 @@ module "asg" {
 
 module "security_group_docreader_ec2" {
   source  = "terraform-aws-modules/security-group/aws"
-  version = "~> 4.0"
+  version = "~> 5.1"
 
   name        = "${local.name}-${local.environment}-ec2"
   description = "EC2 security group"
   vpc_id      = module.vpc.vpc_id
 
   # Ingress
+
   ingress_with_cidr_blocks = [
+    for key, value in module.vpc.private_subnets_cidr_blocks :
     {
       rule        = "ssh-tcp"
-      cidr_blocks = "0.0.0.0/0"
+      cidr_blocks = value
     }
   ]
 
