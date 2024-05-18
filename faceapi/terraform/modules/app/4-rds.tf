@@ -1,7 +1,8 @@
-module "db" {
-  source     = "terraform-aws-modules/rds/aws"
-  version    = "~> 6.5"
-  identifier = "docreader${var.environment}"
+module "rds" {
+  source  = "terraform-aws-modules/rds/aws"
+  version = "~> 6.5"
+
+  identifier = "faceapi${var.environment}"
 
   # All available versions: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_PostgreSQL.html#PostgreSQL.Concepts
   engine               = "postgres"
@@ -11,6 +12,7 @@ module "db" {
   instance_class       = var.db_instance_class
 
   cloudwatch_log_group_retention_in_days = 365
+
 
   # NOTE: Do NOT use 'user' as the value for 'username' as it throws:
   # "Error creating DB Instance: InvalidParameterValue: MasterUsername
@@ -29,11 +31,10 @@ module "db" {
   publicly_accessible    = true
   vpc_security_group_ids = [module.vpc.default_security_group_id, module.security_group_rds.security_group_id]
 
+
   backup_retention_period = 14
   skip_final_snapshot     = true
-  deletion_protection     = true
-
-  apply_immediately = true
+  deletion_protection     = false
 
   ca_cert_identifier = "rds-ca-rsa2048-g1"
 
@@ -67,7 +68,7 @@ module "security_group_rds" {
   source  = "terraform-aws-modules/security-group/aws"
   version = "~> 5.1"
 
-  name        = "docreader-${local.environment}-rds"
+  name        = "faceapi-${local.environment}-rds"
   description = "PostgreSQL security group"
   vpc_id      = module.vpc.vpc_id
 
@@ -80,5 +81,4 @@ module "security_group_rds" {
   ]
 
   tags = local.tags
-
 }

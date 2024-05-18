@@ -38,7 +38,7 @@ Terraform is an Infrastructure as Code (IaC) software tool. With Terraform, you 
 ### Configure Terraform
 
 - Edit Terraform variables at `terraform/main.tf`.
-- Upload a certificate for your domain "*.example.com" using AWS Certificate Manager (ACM). (See `terraform/variables.tf` - `domain`, `account_id`, `db_password`, `db_username` vars.)
+- Upload a certificate for your domain "*.example.com" using AWS Certificate Manager (ACM). (See `terraform/variables.tf` - `domain`, `db_password`, `db_username` vars.)
 
 
 ### Run Terraform templates
