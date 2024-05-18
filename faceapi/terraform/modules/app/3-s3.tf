@@ -1,12 +1,11 @@
 resource "random_uuid" "default" {
 }
 
-
-module "s3_docreader_bucket_results" {
+module "s3_detect_match_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 4.1"
+  version = "~> 3.0"
 
-  bucket = "docreader-results-${random_uuid.default.result}"
+  bucket = "${local.name}-${random_uuid.default.result}-detect-match"
 
   block_public_acls       = true
   block_public_policy     = true
@@ -22,11 +21,11 @@ module "s3_docreader_bucket_results" {
   tags = local.tags
 }
 
-module "s3_docreader_bucket_session_api" {
+module "s3_liveness_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
-  version = "~> 4.1"
+  version = "~> 3.0"
 
-  bucket = "docreader-session-api-${random_uuid.default.result}"
+  bucket = "${local.name}-${random_uuid.default.result}-liveness"
 
   block_public_acls       = true
   block_public_policy     = true
@@ -41,3 +40,5 @@ module "s3_docreader_bucket_session_api" {
 
   tags = local.tags
 }
+
+

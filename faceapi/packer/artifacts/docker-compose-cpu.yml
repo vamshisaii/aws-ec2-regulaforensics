@@ -4,15 +4,10 @@ services:
   faceapi:
     image: regulaforensics/face-api:${faceapi_tag}-${faceapi_engine}
     container_name: faceapi
-    environment:
-      FACEAPI_ENABLE_DEMO_WEB_APP: "false"
-      FACEAPI_WORKERS: ${worker_count}
-      FACEAPI_BACKLOG: ${backlog}
-      FACEAPI_TIMEOUT: "60"
-      FACEAPI_CORS_ORIGINS: "*"
     volumes:
       - /home/ubuntu/regula.license:/app/extBin/unix/regula.license
       - faceapi_site:/app/view/static
+      - /home/ubuntu/config.yaml:/app/config.yaml
     networks:
       - faceapi-network
     restart: always
