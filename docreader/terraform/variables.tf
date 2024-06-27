@@ -17,7 +17,7 @@ variable "environment" {
 
 variable "region" {
   description = "AWS Region to deploy"
-  default     = "eu-central-1"
+  default     = "eu-west-2"
   type        = string
 }
 
@@ -29,7 +29,7 @@ variable "vpc_network" {
 
 variable "domain" {
   description = "Certificate's domain"
-  default     = "*.example.com"
+  default     = "youngcreator.net"
   type        = string
 }
 

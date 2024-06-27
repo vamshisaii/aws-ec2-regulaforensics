@@ -1,0 +1,11 @@
+{common}
+db_name: regula
+db_password: 12345678
+
+{doc reader}
+docreader account_id: 1
+terraform workspace: dev-docreader
+
+
+{faceapi}
+terraform workspace: dev

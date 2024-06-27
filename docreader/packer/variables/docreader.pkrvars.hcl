@@ -1,4 +1,4 @@
-region             = "eu-central-1"
+region             = "eu-west-2"
 env                = "dev"
 ami_name           = "docreader"
 spot_instance_type = "c6a.large"
